@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -39,7 +40,7 @@ public class BugReportTest {
     @Test
     public void testPreencherTodosOsCamposDoCadastroDeBug(){
 
-        new LoginPage(driver)
+        boolean mensagemDeSucessoAoCadastrarBug = new LoginPage(driver)
                 .realizarLogin("van.eyck","123Mudar")
                 .clicarEmReportIssue()
                 .selecionaOProjetoEClicaNoBotao("Desafio jMeter Project 1")
@@ -51,13 +52,124 @@ public class BugReportTest {
                 .preencherCampoPlatform("preenchendo campo platform")
                 .preencherCampoOS("preenchendo campos OS")
                 .preencherCampoOsVersion("Versão")
-                .preencherCampoPassosDeReproducao("Passos para reproduzir o bug");
+                .preencherCampoSummary("Preenchendo campo do sumário")
+                .preencherCampoDescription("Preenchendo descrição do bug")
+                .preencherCampoPassosDeReproducao("Passos para reproduzir o bug")
+                .preencherCampoInformacoesAdicionais("preenchendo campo de informações adicionais")
+                .selecionarArquivo()
+                .selecionarStatus("private")
+                .marcarFlagDeManterRelatorio()
+                .submeterCadastroDoBug()
+                .retornaMensagemDeSucessoAoCadastrarBug();
 
+        assertTrue(mensagemDeSucessoAoCadastrarBug);
+    }
+
+    @Test
+    public void testNaoPreencherNenhumCampoESubmeterCadastro(){
+
+        String retornaMensagemDeErro = new LoginPage(driver)
+                .realizarLogin("van.eyck","123Mudar")
+                .clicarEmReportIssue()
+                .selecionaOProjetoEClicaNoBotao("Desafio jMeter Project 1")
+                .submeterCadastroDoBug()
+                .retornaMensagemDeErro();
+
+        assertEquals("A necessary field \"Summary\" was empty. Please recheck your inputs.", retornaMensagemDeErro);
+    }
+
+    @Test
+    public void testNaoPreencherCampoCategoriaEPreencherDemaisCamposObrigatorios(){
+
+        String retornaMensagemDeErro = new LoginPage(driver)
+                .realizarLogin("van.eyck","123Mudar")
+                .clicarEmReportIssue()
+                .selecionaOProjetoEClicaNoBotao("Desafio jMeter Project 1")
+                .preencherCampoSummary("preenche summary")
+                .preencherCampoDescription("preenche description")
+                .submeterCadastroDoBug()
+                .retornaMensagemDeErro();
+
+        assertEquals("A necessary field \"Category\" was empty. Please recheck your inputs.",retornaMensagemDeErro);
+    }
+
+    @Test
+    public void testNaoPreencherCampoSumarioEPreencherDemaisCamposObrigatorios(){
+
+        String retornaMensagemDeErro = new LoginPage(driver)
+                .realizarLogin("van.eyck","123Mudar")
+                .clicarEmReportIssue()
+                .selecionaOProjetoEClicaNoBotao("Desafio jMeter Project 1")
+                .selecionaCategoria("[All Projects] Teste")
+                .preencherCampoDescription("preenche description")
+                .submeterCadastroDoBug()
+                .retornaMensagemDeErro();
+
+        assertEquals("A necessary field \"Summary\" was empty. Please recheck your inputs.", retornaMensagemDeErro);
+    }
+
+    @Test
+    public void testNaoPreencherCampoDescricaoEPreencherDemaisCamposObrigatorios(){
+
+        String retornaMensagemDeErro = new LoginPage(driver)
+                .realizarLogin("van.eyck","123Mudar")
+                .clicarEmReportIssue()
+                .selecionaOProjetoEClicaNoBotao("Desafio jMeter Project 1")
+                .selecionaCategoria("[All Projects] Teste")
+                .preencherCampoSummary("teste!!")
+                .submeterCadastroDoBug()
+                .retornaMensagemDeErro();
+
+        assertEquals("A necessary field \"Description\" was empty. Please recheck your inputs.", retornaMensagemDeErro);
 
     }
 
+    @Test
+    public void testPreencherApenasCampoCategoriaENaoPreencherDemaisCamposObrigatorios(){
 
-    @Ignore
+        String retornaMensagemDeErro = new LoginPage(driver)
+                .realizarLogin("van.eyck","123Mudar")
+                .clicarEmReportIssue()
+                .selecionaOProjetoEClicaNoBotao("Desafio jMeter Project 1")
+                .selecionaCategoria("[All Projects] Teste")
+                .submeterCadastroDoBug()
+                .retornaMensagemDeErro();
+
+        assertEquals("A necessary field \"Summary\" was empty. Please recheck your inputs.", retornaMensagemDeErro);
+
+    }
+
+    @Test
+    public void testPreencherApenasCampoSumarioENaoPreencherDemaisCamposObrigatorios(){
+
+        String retornaMensagemDeErro = new LoginPage(driver)
+                .realizarLogin("van.eyck","123Mudar")
+                .clicarEmReportIssue()
+                .selecionaOProjetoEClicaNoBotao("Desafio jMeter Project 1")
+                .preencherCampoSummary("sumario teste")
+                .submeterCadastroDoBug()
+                .retornaMensagemDeErro();
+
+        assertEquals("A necessary field \"Description\" was empty. Please recheck your inputs.", retornaMensagemDeErro);
+
+    }
+
+    @Test
+    public void testPreencherApenasCampoDescricaoENaoPreencherDemaisCamposObrigatorios(){
+
+        String retornaMensagemDeErro = new LoginPage(driver)
+                .realizarLogin("van.eyck","123Mudar")
+                .clicarEmReportIssue()
+                .selecionaOProjetoEClicaNoBotao("Desafio jMeter Project 1")
+                .preencherCampoDescription("test descricao")
+                .submeterCadastroDoBug()
+                .retornaMensagemDeErro();
+
+        assertEquals("A necessary field \"Summary\" was empty. Please recheck your inputs.", retornaMensagemDeErro);
+
+    }
+
+    @After
     public void tearDown(){
         driver.quit();
     }

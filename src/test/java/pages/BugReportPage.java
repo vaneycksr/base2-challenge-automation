@@ -99,11 +99,39 @@ public class BugReportPage extends BasePage{
         return this;
     }
 
-    public BugReportSuccessfulPage submeterCadastroDoBug(){
+    public BugReportPage preencherCampoInformacoesAdicionais(String info){
+
+        driver.findElement(By.cssSelector("textarea[name='additional_info']")).sendKeys(info);
+
+        return this;
+    }
+
+    public BugReportPage selecionarArquivo(){
+
+        driver.findElement(By.cssSelector("input[type='file']")).sendKeys("/home/vaneyck/Documentos/teste.txt");
+
+        return this;
+    }
+
+    public BugReportPage selecionarStatus(String status){
+
+        driver.findElement(By.xpath("//label[contains(text(),'"+status+"')]/input")).click();
+
+        return this;
+    }
+
+    public BugReportPage marcarFlagDeManterRelatorio(){
+
+        driver.findElement(By.id("report_stay")).click();
+
+        return this;
+    }
+
+    public BugReportInformationPage submeterCadastroDoBug(){
 
         driver.findElement(By.cssSelector("input[value='Submit Report']")).click();
 
-        return new BugReportSuccessfulPage(driver);
+        return new BugReportInformationPage(driver);
     }
 
 }

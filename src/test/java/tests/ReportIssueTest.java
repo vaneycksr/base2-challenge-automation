@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -33,8 +34,7 @@ public class ReportIssueTest {
         assertEquals(projectSelected,retornaProjetoAtual);
     }
 
-
-    @Ignore
+    @After
     public void tearDown(){
         driver.quit();
     }
