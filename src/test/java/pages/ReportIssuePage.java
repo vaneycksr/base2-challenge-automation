@@ -33,4 +33,12 @@ public class ReportIssuePage extends BasePage {
         return new BugReportPage(driver);
     }
 
+    public BugReportPage selecionaOProjetoEClicaNoBotao(String project){
+
+        selecionarProjeto(project);
+        clicarEmSelectProject();
+
+        return new BugReportPage(driver);
+    }
+
 }

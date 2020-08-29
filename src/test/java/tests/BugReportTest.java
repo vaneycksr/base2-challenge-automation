@@ -36,6 +36,25 @@ public class BugReportTest {
         assertTrue(mensagemDeSucessoAoCadastrarBug);
     }
 
+    @Test
+    public void testPreencherTodosOsCamposDoCadastroDeBug(){
+
+        new LoginPage(driver)
+                .realizarLogin("van.eyck","123Mudar")
+                .clicarEmReportIssue()
+                .selecionaOProjetoEClicaNoBotao("Desafio jMeter Project 1")
+                .selecionaCategoria("[All Projects] Teste")
+                .selecionaReproduzibilidade("always")
+                .selecionaGravidade("major")
+                .selecionaPrioridade("urgent")
+                .selecionaPerfil("PlataformaTeste SiSTEMA Windows10")
+                .preencherCampoPlatform("preenchendo campo platform")
+                .preencherCampoOS("preenchendo campos OS")
+                .preencherCampoOsVersion("Versão")
+                .preencherCampoPassosDeReproducao("Passos para reproduzir o bug");
+
+
+    }
 
 
     @Ignore
