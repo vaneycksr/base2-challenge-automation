@@ -3,7 +3,11 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
+
+import java.util.concurrent.TimeUnit;
 
 public class BugReportPage extends BasePage{
     public BugReportPage(WebDriver driver) {
@@ -128,6 +132,15 @@ public class BugReportPage extends BasePage{
     }
 
     public BugReportInformationPage submeterCadastroDoBug(){
+
+        driver.findElement(By.cssSelector("input[value='Submit Report']")).click();
+
+        return new BugReportInformationPage(driver);
+    }
+
+    public BugReportInformationPage demorarParaSubmeterCadastroDoBug() {
+
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.MINUTES);
 
         driver.findElement(By.cssSelector("input[value='Submit Report']")).click();
 

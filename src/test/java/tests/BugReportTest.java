@@ -169,6 +169,24 @@ public class BugReportTest {
 
     }
 
+    @Ignore
+    public void testDemorarParaSubmeterOFormularioDoBug(){
+
+        String retornaMensagemDeErro = new LoginPage(driver)
+                .realizarLogin("van.eyck","123Mudar")
+                .clicarEmReportIssue()
+                .selecionaOProjetoEClicaNoBotao("Desafio jMeter Project 1")
+                .selecionaCategoria("[All Projects] Teste")
+                .preencherCampoSummary("testee")
+                .preencherCampoDescription("test descricao")
+                .demorarParaSubmeterCadastroDoBug()
+                .retornaMensagemDeErro();
+
+        assertEquals("Invalid form security token. This could be caused by a session timeout, or accidentally submitting the form twice.",
+                retornaMensagemDeErro);
+    }
+
+
     @After
     public void tearDown(){
         driver.quit();

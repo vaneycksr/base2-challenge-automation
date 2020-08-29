@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import pages.LoginPage;
 import support.Web;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class MyViewTest {
 
@@ -19,9 +19,18 @@ public class MyViewTest {
         driver = Web.creatChrome();
     }
 
-    // TODO: 28/08/2020 falta implementar os testes 
+    @Test
+    public void testRealizarLogout(){
 
-    @Ignore
+        boolean exibirBotaoLogin = new LoginPage(driver)
+                .realizarLogin("van.eyck","123Mudar")
+                .clicarEmLogout()
+                .exibirBotaoLogin();
+
+        assertTrue(exibirBotaoLogin);
+    }
+
+    @After
     public void tearDown(){
         driver.quit();
     }

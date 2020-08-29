@@ -22,5 +22,12 @@ public class MyViewPage extends BasePage{
         return new ReportIssuePage(driver);
     }
 
+    public LoginPage clicarEmLogout(){
+
+        driver.findElement(By.linkText("Logout")).click();
+
+        return new LoginPage(driver);
+    }
+
 
 }

@@ -30,7 +30,7 @@ public class LoginPage extends BasePage {
         return new MyViewPage(driver);
     }
 
-    public  MyViewPage realizarLogin(String username, String password){
+    public MyViewPage realizarLogin(String username, String password){
 
         digitarUsername(username);
         digitarPassword(password);
@@ -39,5 +39,9 @@ public class LoginPage extends BasePage {
         return new MyViewPage(driver);
     }
 
+    public boolean exibirBotaoLogin(){
+
+        return driver.findElement(By.cssSelector("input[value='Login']")).isDisplayed();
+    }
 
 }
