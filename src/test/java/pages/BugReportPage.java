@@ -17,4 +17,33 @@ public class BugReportPage extends BasePage{
 
     }
 
+    public BugReportPage selecionaCategoria(String category){
+
+        WebElement element = driver.findElement(By.cssSelector("select[name='category_id']"));
+        new Select(element).selectByVisibleText(category);
+
+        return this;
+    }
+
+    public BugReportPage preencherCampoSummary(String summary){
+
+        driver.findElement(By.cssSelector("input[name='summary']")).sendKeys(summary);
+
+        return this;
+    }
+
+    public BugReportPage preencherCampoDescription(String description){
+
+        driver.findElement(By.cssSelector("textarea[name='description']")).sendKeys(description);
+
+        return this;
+    }
+
+    public BugReportSuccessfulPage submeterCadastroDoBug(){
+
+        driver.findElement(By.cssSelector("input[value='Submit Report']")).click();
+
+        return new BugReportSuccessfulPage(driver);
+    }
+
 }

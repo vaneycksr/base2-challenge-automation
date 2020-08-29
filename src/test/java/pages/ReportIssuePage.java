@@ -14,7 +14,6 @@ public class ReportIssuePage extends BasePage {
     public String verificarSeEstarNaPaginaReportIssue(){
 
         // //input[@name='ref']
-        //return driver.findElement(By.xpath("(//div[3]/form//table/tbody/tr[1]/td/text())[2]")).getText();
         return driver.findElement(By.xpath("(//div[3]/form//table/tbody/tr[1]/td/text())[2]")).getText();
 
     }
