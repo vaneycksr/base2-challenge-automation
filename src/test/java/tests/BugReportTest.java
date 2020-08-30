@@ -44,20 +44,11 @@ public class BugReportTest {
                 .realizarLogin("van.eyck","123Mudar")
                 .clicarEmReportIssue()
                 .selecionaOProjetoEClicaNoBotao("Desafio jMeter Project 1")
-                .selecionaCategoria("[All Projects] Teste")
-                .selecionaReproduzibilidade("always")
-                .selecionaGravidade("major")
-                .selecionaPrioridade("urgent")
-                .selecionaPerfil("PlataformaTeste SiSTEMA Windows10")
-                .preencherCampoPlatform("preenchendo campo platform")
-                .preencherCampoOS("preenchendo campos OS")
-                .preencherCampoOsVersion("Versão")
-                .preencherCampoSummary("Preenchendo campo do sumário")
-                .preencherCampoDescription("Preenchendo descrição do bug")
-                .preencherCampoPassosDeReproducao("Passos para reproduzir o bug")
-                .preencherCampoInformacoesAdicionais("preenchendo campo de informações adicionais")
+                .opcoesDeMarcar("[All Projects] Teste","always","major",
+                                "urgent","PlataformaTeste SiSTEMA Windows10","public")
+                .opcoesDePreencher("plataforma","test os", "test os version", "test sumário",
+                                    "test descrição", "passo a passo do bug", "informações adidionais")
                 .selecionarArquivo()
-                .selecionarStatus("private")
                 .marcarFlagDeManterRelatorio()
                 .submeterCadastroDoBug()
                 .retornaMensagemDeSucessoAoCadastrarBug();
@@ -185,7 +176,6 @@ public class BugReportTest {
         assertEquals("Invalid form security token. This could be caused by a session timeout, or accidentally submitting the form twice.",
                 retornaMensagemDeErro);
     }
-
 
     @After
     public void tearDown(){

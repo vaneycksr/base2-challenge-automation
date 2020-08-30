@@ -3,9 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -53,10 +51,10 @@ public class BugReportPage extends BasePage{
         return this;
     }
 
-    public BugReportPage selecionaPerfil(String perfil){
+    public BugReportPage selecionaPerfil(String profile){
 
         WebElement element = driver.findElement(By.cssSelector("select[name='profile_id']"));
-        new Select(element).selectByVisibleText(perfil);
+        new Select(element).selectByVisibleText(profile);
 
         return this;
     }
@@ -145,6 +143,61 @@ public class BugReportPage extends BasePage{
         driver.findElement(By.cssSelector("input[value='Submit Report']")).click();
 
         return new BugReportInformationPage(driver);
+    }
+
+    /**
+     * também envia arquivo e marca a flag do relatório
+     * */
+    public BugReportInformationPage preencherTodosOsCampos(String category, String reproducibility, String severity,
+                                                    String priority, String profile, String plataform,
+                                                    String os, String osVersion, String summary,
+                                                    String description, String steps, String info,
+                                                    String status){
+            selecionaCategoria(category);
+            selecionaReproduzibilidade(reproducibility);
+            selecionaGravidade(severity);
+            selecionaPrioridade(priority);
+            selecionaPerfil(profile);
+            preencherCampoPlatform(plataform);
+            preencherCampoOS(os);
+            preencherCampoOsVersion(osVersion);
+            preencherCampoSummary(summary);
+            preencherCampoDescription(description);
+            preencherCampoPassosDeReproducao(steps);
+            preencherCampoInformacoesAdicionais(info);
+            selecionarArquivo();
+            selecionarStatus(status);
+            marcarFlagDeManterRelatorio();
+            submeterCadastroDoBug();
+
+        return new BugReportInformationPage(driver);
+    }
+
+    public BugReportPage opcoesDeMarcar(String category, String reproducibility, String severity,
+                                                   String priority, String profile, String status){
+
+        selecionaCategoria(category);
+        selecionaReproduzibilidade(reproducibility);
+        selecionaGravidade(severity);
+        selecionaPrioridade(priority);
+        selecionaPerfil(profile);
+        selecionarStatus(status);
+
+        return this;
+    }
+
+    public BugReportPage opcoesDePreencher(String plataform, String os, String osVersion, String summary,
+                                                      String description, String steps, String info){
+
+        preencherCampoPlatform(plataform);
+        preencherCampoOS(os);
+        preencherCampoOsVersion(osVersion);
+        preencherCampoSummary(summary);
+        preencherCampoDescription(description);
+        preencherCampoPassosDeReproducao(steps);
+        preencherCampoInformacoesAdicionais(info);
+
+        return this;
     }
 
 }
