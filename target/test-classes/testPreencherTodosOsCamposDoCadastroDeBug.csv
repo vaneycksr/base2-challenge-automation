@@ -1,0 +1,4 @@
+testPreencherTodosOsCamposDoCadastroDeBug,project,category,reproducibility,severity,priority,profile,status,plataform,os,osVersion,summary,description,steps,info,Duration(ms),Duration(ms)
+"",Desafio jMeter Project 1,[All Projects] Teste,always,major,urgent,PlataformaTeste SiSTEMA Windows10,public,plataforma,test os,test os version,test sumário,test descrição,passo a passo do bug,informações adidionais,4562.0,4562.0
+"",Desafio jMeter Project 2,[All Projects] a,random,crash,immediate,PlataformaTeste SiSTEMA Windows10,public,plataforma 2,test os 2,test os version 2,test sumário 2,test descrição 2,passo a passo do bug 2,informações adidionais 2,4884.0,4884.0
+"",ProjectTatiane,[All Projects] Teste,sometimes,block,immediate,PC Windows XP,private,plataforma 3,test os 3,test os version 3,test sumário 3,test descrição 3,passo a passo do bug 3,informações adidionais 3,4668.0,4668.0

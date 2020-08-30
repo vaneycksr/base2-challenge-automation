@@ -11,13 +11,6 @@ public class ReportIssuePage extends BasePage {
         super(driver);
     }
 
-    public String verificarSeEstarNaPaginaReportIssue(){
-
-        // //input[@name='ref']
-        return driver.findElement(By.xpath("(//div[3]/form//table/tbody/tr[1]/td/text())[2]")).getText();
-
-    }
-
     public ReportIssuePage selecionarProjeto(String project){
 
         WebElement element = driver.findElement(By.xpath("//form/table/tbody/tr[2]/td[2]/select"));

@@ -1,15 +1,21 @@
 package tests;
 
+import org.easetech.easytest.annotation.DataLoader;
+import org.easetech.easytest.annotation.Param;
+import org.easetech.easytest.runner.DataDrivenTestRunner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import pages.LoginPage;
 import support.Web;
 
 import static org.junit.Assert.*;
 
+@RunWith(DataDrivenTestRunner.class)
+@DataLoader(filePaths = "testPreencherTodosOsCamposDoCadastroDeBug.csv")
 public class BugReportTest {
 
     private WebDriver driver;
@@ -38,16 +44,21 @@ public class BugReportTest {
     }
 
     @Test
-    public void testPreencherTodosOsCamposDoCadastroDeBug(){
+    public void testPreencherTodosOsCamposDoCadastroDeBug(@Param(name = "project")String project, @Param(name = "category")String category,
+                                                          @Param(name = "reproducibility")String reproducibility, @Param(name = "severity")String severity,
+                                                          @Param(name = "priority")String priority, @Param(name = "profile")String profile,
+                                                          @Param(name = "status")String status, @Param(name = "plataform")String plataform,
+                                                          @Param(name = "os")String os, @Param(name = "osVersion")String osVersion,
+                                                          @Param(name = "summary")String summary, @Param(name = "description")String description,
+                                                          @Param(name = "steps")String steps, @Param(name = "info")String info
+                                                        ){
 
         boolean mensagemDeSucessoAoCadastrarBug = new LoginPage(driver)
                 .realizarLogin("van.eyck","123Mudar")
                 .clicarEmReportIssue()
-                .selecionaOProjetoEClicaNoBotao("Desafio jMeter Project 1")
-                .opcoesDeMarcar("[All Projects] Teste","always","major",
-                                "urgent","PlataformaTeste SiSTEMA Windows10","public")
-                .opcoesDePreencher("plataforma","test os", "test os version", "test sumário",
-                                    "test descrição", "passo a passo do bug", "informações adidionais")
+                .selecionaOProjetoEClicaNoBotao(project)
+                .opcoesDeMarcar(category,reproducibility,severity,priority,profile,status)
+                .opcoesDePreencher(plataform,os, osVersion, summary,description, steps, info)
                 .selecionarArquivo()
                 .marcarFlagDeManterRelatorio()
                 .submeterCadastroDoBug()
